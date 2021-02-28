@@ -1,0 +1,126 @@
+<div>
+  <h2 id="page-heading" data-cy="RequisitionHeading">
+    <span jhiTranslate="constructionmanagementApp.requisition.home.title">Requisitions</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="constructionmanagementApp.requisition.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-requisition"
+        [routerLink]="['/requisition/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="constructionmanagementApp.requisition.home.createLabel"> Create a new Requisition </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="requisitions?.length === 0">
+    <span jhiTranslate="constructionmanagementApp.requisition.home.notFound">No requisitions found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="requisitions && requisitions.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="name">
+            <span jhiTranslate="constructionmanagementApp.requisition.name">Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="coordinate">
+            <span jhiTranslate="constructionmanagementApp.requisition.coordinate">Coordinate</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="state">
+            <span jhiTranslate="constructionmanagementApp.requisition.state">State</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="date">
+            <span jhiTranslate="constructionmanagementApp.requisition.date">Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="buildType.name">
+            <span jhiTranslate="constructionmanagementApp.requisition.buildType">Build Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="citadel.name">
+            <span jhiTranslate="constructionmanagementApp.requisition.citadel">Citadel</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let requisition of requisitions; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/requisition', requisition.id, 'view']">{{ requisition.id }}</a>
+          </td>
+          <td>{{ requisition.name }}</td>
+          <td>{{ requisition.coordinate }}</td>
+          <td jhiTranslate="{{ 'constructionmanagementApp.RequisitionState.' + requisition.state }}">{{ requisition.state }}</td>
+          <td>{{ requisition.date | formatMediumDate }}</td>
+          <td>
+            <div *ngIf="requisition.buildType">
+              <a [routerLink]="['/build-type', requisition.buildType?.id, 'view']">{{ requisition.buildType?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="requisition.citadel">
+              <a [routerLink]="['/citadel', requisition.citadel?.id, 'view']">{{ requisition.citadel?.name }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/requisition', requisition.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/requisition', requisition.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(requisition)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="requisitions && requisitions.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,129 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-build-order-heading"
+        data-cy="BuildOrderCreateUpdateHeading"
+        jhiTranslate="constructionmanagementApp.buildOrder.home.createOrEditLabel"
+      >
+        Create or edit a Build Order
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildOrder.state" for="field_state">State</label>
+          <select class="form-control" name="state" formControlName="state" id="field_state" data-cy="state">
+            <option [ngValue]="null">{{ 'constructionmanagementApp.BuildOrderState.null' | translate }}</option>
+            <option value="PENDING">{{ 'constructionmanagementApp.BuildOrderState.PENDING' | translate }}</option>
+            <option value="BUILDING">{{ 'constructionmanagementApp.BuildOrderState.BUILDING' | translate }}</option>
+            <option value="FINISHED">{{ 'constructionmanagementApp.BuildOrderState.FINISHED' | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('state')!.invalid && (editForm.get('state')!.dirty || editForm.get('state')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('state')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildOrder.start" for="field_start">Start</label>
+          <div class="input-group">
+            <input
+              id="field_start"
+              data-cy="start"
+              type="text"
+              class="form-control"
+              name="start"
+              ngbDatepicker
+              #startDp="ngbDatepicker"
+              formControlName="start"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="startDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+          </div>
+          <div *ngIf="editForm.get('start')!.invalid && (editForm.get('start')!.dirty || editForm.get('start')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('start')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildOrder.finish" for="field_finish">Finish</label>
+          <div class="input-group">
+            <input
+              id="field_finish"
+              data-cy="finish"
+              type="text"
+              class="form-control"
+              name="finish"
+              ngbDatepicker
+              #finishDp="ngbDatepicker"
+              formControlName="finish"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="finishDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+          </div>
+          <div *ngIf="editForm.get('finish')!.invalid && (editForm.get('finish')!.dirty || editForm.get('finish')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('finish')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildOrder.requisition" for="field_requisition"
+            >Requisition</label
+          >
+          <select class="form-control" id="field_requisition" data-cy="requisition" name="requisition" formControlName="requisition">
+            <option *ngIf="editForm.get(['requisition'])!.value == null" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="
+                requisitionOption.id === editForm.get('requisition')!.value?.id ? editForm.get('requisition')!.value : requisitionOption
+              "
+              *ngFor="let requisitionOption of requisitions; trackBy: trackRequisitionById"
+            >
+              {{ requisitionOption.name }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="editForm.get(['requisition'])!.invalid && (editForm.get(['requisition'])!.dirty || editForm.get(['requisition'])!.touched)"
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['requisition'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

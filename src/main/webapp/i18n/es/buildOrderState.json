@@ -1,0 +1,10 @@
+{
+  "constructionmanagementApp": {
+    "BuildOrderState": {
+      "null": "",
+      "PENDING": "PENDING",
+      "BUILDING": "BUILDING",
+      "FINISHED": "FINISHED"
+    }
+  }
+}

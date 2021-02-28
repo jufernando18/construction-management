@@ -1,0 +1,163 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-requisition-heading"
+        data-cy="RequisitionCreateUpdateHeading"
+        jhiTranslate="constructionmanagementApp.requisition.home.createOrEditLabel"
+      >
+        Create or edit a Requisition
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.requisition.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.requisition.coordinate" for="field_coordinate"
+            >Coordinate</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="coordinate"
+            id="field_coordinate"
+            data-cy="coordinate"
+            formControlName="coordinate"
+          />
+          <div *ngIf="editForm.get('coordinate')!.invalid && (editForm.get('coordinate')!.dirty || editForm.get('coordinate')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('coordinate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('coordinate')?.errors?.pattern"
+              jhiTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'Coordinate' }"
+            >
+              This field should follow pattern for "Coordinate".
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.requisition.state" for="field_state">State</label>
+          <select class="form-control" name="state" formControlName="state" id="field_state" data-cy="state">
+            <option [ngValue]="null">{{ 'constructionmanagementApp.RequisitionState.null' | translate }}</option>
+            <option value="FAILED">{{ 'constructionmanagementApp.RequisitionState.FAILED' | translate }}</option>
+            <option value="APPROVED">{{ 'constructionmanagementApp.RequisitionState.APPROVED' | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('state')!.invalid && (editForm.get('state')!.dirty || editForm.get('state')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('state')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.requisition.date" for="field_date">Date</label>
+          <div class="input-group">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="text"
+              class="form-control"
+              name="date"
+              ngbDatepicker
+              #dateDp="ngbDatepicker"
+              formControlName="date"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+          </div>
+          <div *ngIf="editForm.get('date')!.invalid && (editForm.get('date')!.dirty || editForm.get('date')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('date')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.requisition.buildType" for="field_buildType"
+            >Build Type</label
+          >
+          <select class="form-control" id="field_buildType" data-cy="buildType" name="buildType" formControlName="buildType">
+            <option *ngIf="!editForm.get('buildType')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="buildTypeOption.id === editForm.get('buildType')!.value?.id ? editForm.get('buildType')!.value : buildTypeOption"
+              *ngFor="let buildTypeOption of buildtypes; trackBy: trackBuildTypeById"
+            >
+              {{ buildTypeOption.name }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['buildType'])!.invalid && (editForm.get(['buildType'])!.dirty || editForm.get(['buildType'])!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['buildType'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.requisition.citadel" for="field_citadel">Citadel</label>
+          <select class="form-control" id="field_citadel" data-cy="citadel" name="citadel" formControlName="citadel">
+            <option *ngIf="!editForm.get('citadel')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="citadelOption.id === editForm.get('citadel')!.value?.id ? editForm.get('citadel')!.value : citadelOption"
+              *ngFor="let citadelOption of citadels; trackBy: trackCitadelById"
+            >
+              {{ citadelOption.name }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['citadel'])!.invalid && (editForm.get(['citadel'])!.dirty || editForm.get(['citadel'])!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['citadel'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="requisition">
+      <h2 data-cy="requisitionDetailsHeading">
+        <span jhiTranslate="constructionmanagementApp.requisition.detail.title">Requisition</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ requisition.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="constructionmanagementApp.requisition.name">Name</span></dt>
+        <dd>
+          <span>{{ requisition.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="constructionmanagementApp.requisition.coordinate">Coordinate</span></dt>
+        <dd>
+          <span>{{ requisition.coordinate }}</span>
+        </dd>
+        <dt><span jhiTranslate="constructionmanagementApp.requisition.state">State</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'constructionmanagementApp.RequisitionState.' + requisition.state }}">{{ requisition.state }}</span>
+        </dd>
+        <dt><span jhiTranslate="constructionmanagementApp.requisition.date">Date</span></dt>
+        <dd>
+          <span>{{ requisition.date | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="constructionmanagementApp.requisition.buildType">Build Type</span></dt>
+        <dd>
+          <div *ngIf="requisition.buildType">
+            <a [routerLink]="['/build-type', requisition.buildType?.id, 'view']">{{ requisition.buildType?.name }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="constructionmanagementApp.requisition.citadel">Citadel</span></dt>
+        <dd>
+          <div *ngIf="requisition.citadel">
+            <a [routerLink]="['/citadel', requisition.citadel?.id, 'view']">{{ requisition.citadel?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/requisition', requisition.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

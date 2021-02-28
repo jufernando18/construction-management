@@ -1,0 +1,29 @@
+{
+  "constructionmanagementApp": {
+    "requisition": {
+      "home": {
+        "title": "Requisitions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Crear nuevo Requisition",
+        "createOrEditLabel": "Crear o editar Requisition",
+        "notFound": "Ningún Requisitions encontrado"
+      },
+      "created": "Un nuevo Requisition ha sido creado con el identificador {{ param }}",
+      "updated": "Un Requisition ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Requisition ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Requisition {{ id }}?"
+      },
+      "detail": {
+        "title": "Requisition"
+      },
+      "id": "ID",
+      "name": "Name",
+      "coordinate": "Coordinate",
+      "state": "State",
+      "date": "Date",
+      "buildType": "Build Type",
+      "citadel": "Citadel"
+    }
+  }
+}

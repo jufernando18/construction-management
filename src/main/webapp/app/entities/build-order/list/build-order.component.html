@@ -1,0 +1,114 @@
+<div>
+  <h2 id="page-heading" data-cy="BuildOrderHeading">
+    <span jhiTranslate="constructionmanagementApp.buildOrder.home.title">Build Orders</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="constructionmanagementApp.buildOrder.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-build-order"
+        [routerLink]="['/build-order/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="constructionmanagementApp.buildOrder.home.createLabel"> Create a new Build Order </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="buildOrders?.length === 0">
+    <span jhiTranslate="constructionmanagementApp.buildOrder.home.notFound">No buildOrders found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="buildOrders && buildOrders.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="state">
+            <span jhiTranslate="constructionmanagementApp.buildOrder.state">State</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="start">
+            <span jhiTranslate="constructionmanagementApp.buildOrder.start">Start</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="finish">
+            <span jhiTranslate="constructionmanagementApp.buildOrder.finish">Finish</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="requisition.name">
+            <span jhiTranslate="constructionmanagementApp.buildOrder.requisition">Requisition</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let buildOrder of buildOrders; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/build-order', buildOrder.id, 'view']">{{ buildOrder.id }}</a>
+          </td>
+          <td jhiTranslate="{{ 'constructionmanagementApp.BuildOrderState.' + buildOrder.state }}">{{ buildOrder.state }}</td>
+          <td>{{ buildOrder.start | formatMediumDate }}</td>
+          <td>{{ buildOrder.finish | formatMediumDate }}</td>
+          <td>
+            <div *ngIf="buildOrder.requisition">
+              <a [routerLink]="['/requisition', buildOrder.requisition?.id, 'view']">{{ buildOrder.requisition?.name }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/build-order', buildOrder.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/build-order', buildOrder.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(buildOrder)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="buildOrders && buildOrders.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+{
+  "constructionmanagementApp": {
+    "RequisitionState": {
+      "null": "",
+      "FAILED": "FAILED",
+      "APPROVED": "APPROVED"
+    }
+  }
+}

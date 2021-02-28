@@ -1,0 +1,167 @@
+<div>
+  <h2 id="page-heading" data-cy="BuildTypeHeading">
+    <span jhiTranslate="constructionmanagementApp.buildType.home.title">Build Types</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="constructionmanagementApp.buildType.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-build-type"
+        [routerLink]="['/build-type/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="constructionmanagementApp.buildType.home.createLabel"> Create a new Build Type </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="buildTypes?.length === 0">
+    <span jhiTranslate="constructionmanagementApp.buildType.home.notFound">No buildTypes found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="buildTypes && buildTypes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="name">
+            <span jhiTranslate="constructionmanagementApp.buildType.name">Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="duration">
+            <span jhiTranslate="constructionmanagementApp.buildType.duration">Duration</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="amountMaterial1">
+            <span jhiTranslate="constructionmanagementApp.buildType.amountMaterial1">Amount Material 1</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="amountMaterial2">
+            <span jhiTranslate="constructionmanagementApp.buildType.amountMaterial2">Amount Material 2</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="amountMaterial3">
+            <span jhiTranslate="constructionmanagementApp.buildType.amountMaterial3">Amount Material 3</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="amountMaterial4">
+            <span jhiTranslate="constructionmanagementApp.buildType.amountMaterial4">Amount Material 4</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="amountMaterial5">
+            <span jhiTranslate="constructionmanagementApp.buildType.amountMaterial5">Amount Material 5</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="material1.name">
+            <span jhiTranslate="constructionmanagementApp.buildType.material1">Material 1</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="material2.name">
+            <span jhiTranslate="constructionmanagementApp.buildType.material2">Material 2</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="material3.name">
+            <span jhiTranslate="constructionmanagementApp.buildType.material3">Material 3</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="material4.name">
+            <span jhiTranslate="constructionmanagementApp.buildType.material4">Material 4</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="material5.name">
+            <span jhiTranslate="constructionmanagementApp.buildType.material5">Material 5</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let buildType of buildTypes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/build-type', buildType.id, 'view']">{{ buildType.id }}</a>
+          </td>
+          <td>{{ buildType.name }}</td>
+          <td>{{ buildType.duration }}</td>
+          <td>{{ buildType.amountMaterial1 }}</td>
+          <td>{{ buildType.amountMaterial2 }}</td>
+          <td>{{ buildType.amountMaterial3 }}</td>
+          <td>{{ buildType.amountMaterial4 }}</td>
+          <td>{{ buildType.amountMaterial5 }}</td>
+          <td>
+            <div *ngIf="buildType.material1">
+              <a [routerLink]="['/material', buildType.material1?.id, 'view']">{{ buildType.material1?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="buildType.material2">
+              <a [routerLink]="['/material', buildType.material2?.id, 'view']">{{ buildType.material2?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="buildType.material3">
+              <a [routerLink]="['/material', buildType.material3?.id, 'view']">{{ buildType.material3?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="buildType.material4">
+              <a [routerLink]="['/material', buildType.material4?.id, 'view']">{{ buildType.material4?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="buildType.material5">
+              <a [routerLink]="['/material', buildType.material5?.id, 'view']">{{ buildType.material5?.name }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/build-type', buildType.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/build-type', buildType.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(buildType)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="buildTypes && buildTypes.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

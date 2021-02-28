@@ -1,0 +1,378 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-build-type-heading"
+        data-cy="BuildTypeCreateUpdateHeading"
+        jhiTranslate="constructionmanagementApp.buildType.home.createOrEditLabel"
+      >
+        Create or edit a Build Type
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.duration" for="field_duration"
+            >Duration</label
+          >
+          <input type="number" class="form-control" name="duration" id="field_duration" data-cy="duration" formControlName="duration" />
+          <div *ngIf="editForm.get('duration')!.invalid && (editForm.get('duration')!.dirty || editForm.get('duration')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('duration')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('duration')?.errors?.min"
+              jhiTranslate="entity.validation.min"
+              [translateValues]="{ min: 1 }"
+            >
+              This field should be at least 1.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('duration')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.amountMaterial1" for="field_amountMaterial1"
+            >Amount Material 1</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="amountMaterial1"
+            id="field_amountMaterial1"
+            data-cy="amountMaterial1"
+            formControlName="amountMaterial1"
+          />
+          <div
+            *ngIf="
+              editForm.get('amountMaterial1')!.invalid &&
+              (editForm.get('amountMaterial1')!.dirty || editForm.get('amountMaterial1')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('amountMaterial1')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('amountMaterial1')?.errors?.min"
+              jhiTranslate="entity.validation.min"
+              [translateValues]="{ min: 0 }"
+            >
+              This field should be at least 0.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('amountMaterial1')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.amountMaterial2" for="field_amountMaterial2"
+            >Amount Material 2</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="amountMaterial2"
+            id="field_amountMaterial2"
+            data-cy="amountMaterial2"
+            formControlName="amountMaterial2"
+          />
+          <div
+            *ngIf="
+              editForm.get('amountMaterial2')!.invalid &&
+              (editForm.get('amountMaterial2')!.dirty || editForm.get('amountMaterial2')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('amountMaterial2')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('amountMaterial2')?.errors?.min"
+              jhiTranslate="entity.validation.min"
+              [translateValues]="{ min: 0 }"
+            >
+              This field should be at least 0.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('amountMaterial2')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.amountMaterial3" for="field_amountMaterial3"
+            >Amount Material 3</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="amountMaterial3"
+            id="field_amountMaterial3"
+            data-cy="amountMaterial3"
+            formControlName="amountMaterial3"
+          />
+          <div
+            *ngIf="
+              editForm.get('amountMaterial3')!.invalid &&
+              (editForm.get('amountMaterial3')!.dirty || editForm.get('amountMaterial3')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('amountMaterial3')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('amountMaterial3')?.errors?.min"
+              jhiTranslate="entity.validation.min"
+              [translateValues]="{ min: 0 }"
+            >
+              This field should be at least 0.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('amountMaterial3')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.amountMaterial4" for="field_amountMaterial4"
+            >Amount Material 4</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="amountMaterial4"
+            id="field_amountMaterial4"
+            data-cy="amountMaterial4"
+            formControlName="amountMaterial4"
+          />
+          <div
+            *ngIf="
+              editForm.get('amountMaterial4')!.invalid &&
+              (editForm.get('amountMaterial4')!.dirty || editForm.get('amountMaterial4')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('amountMaterial4')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('amountMaterial4')?.errors?.min"
+              jhiTranslate="entity.validation.min"
+              [translateValues]="{ min: 0 }"
+            >
+              This field should be at least 0.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('amountMaterial4')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.amountMaterial5" for="field_amountMaterial5"
+            >Amount Material 5</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="amountMaterial5"
+            id="field_amountMaterial5"
+            data-cy="amountMaterial5"
+            formControlName="amountMaterial5"
+          />
+          <div
+            *ngIf="
+              editForm.get('amountMaterial5')!.invalid &&
+              (editForm.get('amountMaterial5')!.dirty || editForm.get('amountMaterial5')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('amountMaterial5')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('amountMaterial5')?.errors?.min"
+              jhiTranslate="entity.validation.min"
+              [translateValues]="{ min: 0 }"
+            >
+              This field should be at least 0.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('amountMaterial5')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.material1" for="field_material1"
+            >Material 1</label
+          >
+          <select class="form-control" id="field_material1" data-cy="material1" name="material1" formControlName="material1">
+            <option *ngIf="!editForm.get('material1')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="materialOption.id === editForm.get('material1')!.value?.id ? editForm.get('material1')!.value : materialOption"
+              *ngFor="let materialOption of materials; trackBy: trackMaterialById"
+            >
+              {{ materialOption.name }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['material1'])!.invalid && (editForm.get(['material1'])!.dirty || editForm.get(['material1'])!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['material1'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.material2" for="field_material2"
+            >Material 2</label
+          >
+          <select class="form-control" id="field_material2" data-cy="material2" name="material2" formControlName="material2">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="materialOption.id === editForm.get('material2')!.value?.id ? editForm.get('material2')!.value : materialOption"
+              *ngFor="let materialOption of materials; trackBy: trackMaterialById"
+            >
+              {{ materialOption.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.material3" for="field_material3"
+            >Material 3</label
+          >
+          <select class="form-control" id="field_material3" data-cy="material3" name="material3" formControlName="material3">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="materialOption.id === editForm.get('material3')!.value?.id ? editForm.get('material3')!.value : materialOption"
+              *ngFor="let materialOption of materials; trackBy: trackMaterialById"
+            >
+              {{ materialOption.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.material4" for="field_material4"
+            >Material 4</label
+          >
+          <select class="form-control" id="field_material4" data-cy="material4" name="material4" formControlName="material4">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="materialOption.id === editForm.get('material4')!.value?.id ? editForm.get('material4')!.value : materialOption"
+              *ngFor="let materialOption of materials; trackBy: trackMaterialById"
+            >
+              {{ materialOption.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.material5" for="field_material5"
+            >Material 5</label
+          >
+          <select class="form-control" id="field_material5" data-cy="material5" name="material5" formControlName="material5">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="materialOption.id === editForm.get('material5')!.value?.id ? editForm.get('material5')!.value : materialOption"
+              *ngFor="let materialOption of materials; trackBy: trackMaterialById"
+            >
+              {{ materialOption.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+{
+  "name": "Requisition",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "coordinate",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "pattern"],
+      "fieldValidateRulesPattern": "^\\d+,\\d+$"
+    },
+    {
+      "fieldName": "state",
+      "fieldType": "RequisitionState",
+      "fieldValues": "FAILED,APPROVED",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "buildType",
+      "otherEntityRelationshipName": "requisition",
+      "relationshipValidateRules": "required",
+      "relationshipName": "buildType",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "citadel",
+      "otherEntityRelationshipName": "requisition",
+      "relationshipValidateRules": "required",
+      "relationshipName": "citadel",
+      "otherEntityField": "name"
+    }
+  ],
+  "entityTableName": "requisition",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["constructionmanagement"],
+  "changelogDate": "20210228134944"
+}

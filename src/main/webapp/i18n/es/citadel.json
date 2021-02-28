@@ -1,0 +1,27 @@
+{
+  "constructionmanagementApp": {
+    "citadel": {
+      "home": {
+        "title": "Citadels",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Crear nuevo Citadel",
+        "createOrEditLabel": "Crear o editar Citadel",
+        "notFound": "Ningún Citadels encontrado"
+      },
+      "created": "Un nuevo Citadel ha sido creado con el identificador {{ param }}",
+      "updated": "Un Citadel ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Citadel ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Citadel {{ id }}?"
+      },
+      "detail": {
+        "title": "Citadel"
+      },
+      "id": "ID",
+      "name": "Name",
+      "address": "Address",
+      "start": "Start",
+      "finish": "Finish"
+    }
+  }
+}

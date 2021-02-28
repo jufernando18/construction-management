@@ -1,0 +1,35 @@
+{
+  "constructionmanagementApp": {
+    "buildType": {
+      "home": {
+        "title": "Build Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Build Type",
+        "createOrEditLabel": "Create or edit a Build Type",
+        "notFound": "No Build Types found"
+      },
+      "created": "A new Build Type is created with identifier {{ param }}",
+      "updated": "A Build Type is updated with identifier {{ param }}",
+      "deleted": "A Build Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Build Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Build Type"
+      },
+      "id": "ID",
+      "name": "Name",
+      "duration": "Duration",
+      "amountMaterial1": "Amount Material 1",
+      "amountMaterial2": "Amount Material 2",
+      "amountMaterial3": "Amount Material 3",
+      "amountMaterial4": "Amount Material 4",
+      "amountMaterial5": "Amount Material 5",
+      "material1": "Material 1",
+      "material2": "Material 2",
+      "material3": "Material 3",
+      "material4": "Material 4",
+      "material5": "Material 5"
+    }
+  }
+}

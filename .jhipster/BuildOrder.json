@@ -1,0 +1,42 @@
+{
+  "name": "BuildOrder",
+  "fields": [
+    {
+      "fieldName": "state",
+      "fieldType": "BuildOrderState",
+      "fieldValues": "PENDING,BUILDING,FINISHED",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "start",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "finish",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "requisition",
+      "otherEntityRelationshipName": "buildOrder",
+      "relationshipValidateRules": "required",
+      "relationshipName": "requisition",
+      "otherEntityField": "name",
+      "ownerSide": true
+    }
+  ],
+  "entityTableName": "build_order",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["constructionmanagement"],
+  "changelogDate": "20210228134544"
+}
