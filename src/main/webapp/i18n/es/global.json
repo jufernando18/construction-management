@@ -1,17 +1,17 @@
 {
   "global": {
-    "title": "Constructionmanagement",
+    "title": "Gestión de Construcción. Constructores S.A.S",
     "browsehappy": "Está usando un navegador <strong>no actualizado</strong>. Por favor, <a href=\"http://browsehappy.com/?locale=es\">actualice su navegador</a> para mejorar su experiencia.",
     "menu": {
       "home": "Inicio",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entidades",
-        "buildOrder": "Build Order",
-        "buildType": "Build Type",
-        "citadel": "Citadel",
+        "buildOrder": "Orden de Construcción",
+        "buildType": "Tipo de Construcción",
+        "citadel": "Ciudadela",
         "material": "Material",
-        "requisition": "Requisition",
+        "requisition": "Solicitud",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -137,7 +137,14 @@
     "file": {
       "could.not.extract": "Could not extract file",
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
-    }
+    },
+    "onCreate": "Error en la creación de  {{ entityName }} ",
+    "coordinateNotAvailable": "En las coordenadas indicadas ya existe una orden de construcción, por favor cambielas e intente nuevamente",
+    "material1NotAvailable": "No hay suficiente Cemento",
+    "material2NotAvailable": "No hay suficiente Grava",
+    "material3NotAvailable": "No hay suficiente Arena",
+    "material4NotAvailable": "No hay suficiente Madera",
+    "material5NotAvailable": "No hay suficiente Adobe"
   },
   "footer": "Pie de página"
 }

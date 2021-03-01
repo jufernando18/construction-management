@@ -1,6 +1,6 @@
 {
   "global": {
-    "title": "Constructionmanagement",
+    "title": "Construction Management. Constructores S.A.S",
     "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
     "menu": {
       "home": "Home",
@@ -138,7 +138,14 @@
     "file": {
       "could.not.extract": "Could not extract file",
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
-    }
+    },
+    "onCreate": "Error on  {{ entityName }}  creation",
+    "coordinateNotAvailable": "Coordinates are assigned to another construction, please change it and try again",
+    "material1NotAvailable": "Not enough Cement",
+    "material2NotAvailable": "Not enough Gravel",
+    "material3NotAvailable": "Not enough Sand",
+    "material4NotAvailable": "Not enough Wood",
+    "material5NotAvailable": "Not enough Adobe"
   },
   "footer": "This is your footer"
 }

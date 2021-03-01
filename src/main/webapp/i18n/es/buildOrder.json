@@ -2,26 +2,26 @@
   "constructionmanagementApp": {
     "buildOrder": {
       "home": {
-        "title": "Build Orders",
+        "title": "Ordenes de Construcción",
         "refreshListLabel": "Refresh list",
-        "createLabel": "Crear nuevo Build Order",
-        "createOrEditLabel": "Crear o editar Build Order",
-        "notFound": "Ningún Build Orders encontrado"
+        "createLabel": "Crear nuevo Orden de Construcción",
+        "createOrEditLabel": "Crear o editar Orden de Construcción",
+        "notFound": "Ningún Orden de Construccións encontrado"
       },
-      "created": "Un nuevo Build Order ha sido creado con el identificador {{ param }}",
-      "updated": "Un Build Order ha sido actualizado con el identificador {{ param }}",
-      "deleted": "Un Build Order ha sido eliminado con el identificador {{ param }}",
+      "created": "Un nuevo Orden de Construcción ha sido creado con el identificador {{ param }}",
+      "updated": "Un Orden de Construcción ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Orden de Construcción ha sido eliminado con el identificador {{ param }}",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Build Order {{ id }}?"
+        "question": "¿Seguro que quiere eliminar Orden de Construcción {{ id }}?"
       },
       "detail": {
-        "title": "Build Order"
+        "title": "Orden de Construcción"
       },
       "id": "ID",
-      "state": "State",
-      "start": "Start",
-      "finish": "Finish",
-      "requisition": "Requisition"
+      "state": "Estado",
+      "start": "Inicio",
+      "finish": "Finalización",
+      "requisition": "Solicitud"
     }
   }
 }
