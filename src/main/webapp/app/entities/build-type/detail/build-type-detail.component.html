@@ -22,31 +22,15 @@
         <dd>
           <span>{{ buildType.duration }}</span>
         </dd>
-        <dt><span jhiTranslate="constructionmanagementApp.buildType.amountMaterial1">Amount Material 1</span></dt>
-        <dd>
-          <span>{{ buildType.amountMaterial1 }}</span>
-        </dd>
-        <dt><span jhiTranslate="constructionmanagementApp.buildType.amountMaterial2">Amount Material 2</span></dt>
-        <dd>
-          <span>{{ buildType.amountMaterial2 }}</span>
-        </dd>
-        <dt><span jhiTranslate="constructionmanagementApp.buildType.amountMaterial3">Amount Material 3</span></dt>
-        <dd>
-          <span>{{ buildType.amountMaterial3 }}</span>
-        </dd>
-        <dt><span jhiTranslate="constructionmanagementApp.buildType.amountMaterial4">Amount Material 4</span></dt>
-        <dd>
-          <span>{{ buildType.amountMaterial4 }}</span>
-        </dd>
-        <dt><span jhiTranslate="constructionmanagementApp.buildType.amountMaterial5">Amount Material 5</span></dt>
-        <dd>
-          <span>{{ buildType.amountMaterial5 }}</span>
-        </dd>
         <dt><span jhiTranslate="constructionmanagementApp.buildType.material1">Material 1</span></dt>
         <dd>
           <div *ngIf="buildType.material1">
             <a [routerLink]="['/material', buildType.material1?.id, 'view']">{{ buildType.material1?.name }}</a>
           </div>
+        </dd>
+        <dt><span jhiTranslate="constructionmanagementApp.buildType.amountMaterial1">Amount Material 1</span></dt>
+        <dd>
+          <span>{{ buildType.amountMaterial1 }}</span>
         </dd>
         <dt><span jhiTranslate="constructionmanagementApp.buildType.material2">Material 2</span></dt>
         <dd>
@@ -54,11 +38,19 @@
             <a [routerLink]="['/material', buildType.material2?.id, 'view']">{{ buildType.material2?.name }}</a>
           </div>
         </dd>
+        <dt><span jhiTranslate="constructionmanagementApp.buildType.amountMaterial2">Amount Material 2</span></dt>
+        <dd>
+          <span>{{ buildType.amountMaterial2 }}</span>
+        </dd>
         <dt><span jhiTranslate="constructionmanagementApp.buildType.material3">Material 3</span></dt>
         <dd>
           <div *ngIf="buildType.material3">
             <a [routerLink]="['/material', buildType.material3?.id, 'view']">{{ buildType.material3?.name }}</a>
           </div>
+        </dd>
+        <dt><span jhiTranslate="constructionmanagementApp.buildType.amountMaterial3">Amount Material 3</span></dt>
+        <dd>
+          <span>{{ buildType.amountMaterial3 }}</span>
         </dd>
         <dt><span jhiTranslate="constructionmanagementApp.buildType.material4">Material 4</span></dt>
         <dd>
@@ -66,11 +58,19 @@
             <a [routerLink]="['/material', buildType.material4?.id, 'view']">{{ buildType.material4?.name }}</a>
           </div>
         </dd>
+        <dt><span jhiTranslate="constructionmanagementApp.buildType.amountMaterial4">Amount Material 4</span></dt>
+        <dd>
+          <span>{{ buildType.amountMaterial4 }}</span>
+        </dd>
         <dt><span jhiTranslate="constructionmanagementApp.buildType.material5">Material 5</span></dt>
         <dd>
           <div *ngIf="buildType.material5">
             <a [routerLink]="['/material', buildType.material5?.id, 'view']">{{ buildType.material5?.name }}</a>
           </div>
+        </dd>
+        <dt><span jhiTranslate="constructionmanagementApp.buildType.amountMaterial5">Amount Material 5</span></dt>
+        <dd>
+          <span>{{ buildType.amountMaterial5 }}</span>
         </dd>
       </dl>
 
