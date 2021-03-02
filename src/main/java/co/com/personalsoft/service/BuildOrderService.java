@@ -55,4 +55,8 @@ public interface BuildOrderService {
     List<BuildOrderDTO> findByStateAndStart(BuildOrderState state, LocalDate start);
     
     List<BuildOrderDTO> findByStateAndFinish(BuildOrderState state, LocalDate finish);
+
+    List<BuildOrderDTO> findByState(BuildOrderState state);
+
+    List<BuildOrderDTO> findByStateAndBuildTypeId(BuildOrderState state, Long buildTypeId);
 }

@@ -1,29 +1,21 @@
 package co.com.personalsoft.service.core.impl;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import co.com.personalsoft.domain.core.impl.DomainBusinessImpl;
-import co.com.personalsoft.domain.core.shared.Pair;
-import co.com.personalsoft.domain.enumeration.BuildOrderState;
-import co.com.personalsoft.domain.enumeration.RequisitionState;
 import co.com.personalsoft.service.BuildOrderService;
 import co.com.personalsoft.service.BuildTypeService;
 import co.com.personalsoft.service.CitadelService;
 import co.com.personalsoft.service.MaterialService;
-import co.com.personalsoft.service.RequisitionQueryService;
 import co.com.personalsoft.service.RequisitionService;
 import co.com.personalsoft.service.core.Business;
-import co.com.personalsoft.service.core.errors.EntityBusinessException;
 import co.com.personalsoft.service.dto.BuildOrderDTO;
 import co.com.personalsoft.service.dto.BuildTypeDTO;
 import co.com.personalsoft.service.dto.CitadelDTO;
 import co.com.personalsoft.service.dto.MaterialDTO;
-import co.com.personalsoft.service.dto.RequisitionCriteria;
 import co.com.personalsoft.service.dto.RequisitionDTO;
-import tech.jhipster.service.filter.StringFilter;
 
 /**
  * BusinessImpl

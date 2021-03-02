@@ -40,6 +40,5 @@ public final class ErrorMsg {
     msg.put(NOT_VALID_CITADEL, "La ciudadela indicada no existe");
   }
   
-  private ErrorMsg() {
-  }
+  private ErrorMsg() {}
 }

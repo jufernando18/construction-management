@@ -103,4 +103,19 @@ public class BuildOrderServiceImpl implements BuildOrderService {
       List<BuildOrder> buildOrders = buildOrderRepository.findByStateAndFinish(state, finish);
       return buildOrderMapper.toDto(buildOrders);
     }
+
+    @Override
+    public List<BuildOrderDTO> findByState(BuildOrderState state) {
+      log.debug("Request to get BuildOrder by state : {}", state);
+      List<BuildOrder> buildOrders = buildOrderRepository.findByState(state);
+      return buildOrderMapper.toDto(buildOrders);
+    }
+
+    @Override
+    public List<BuildOrderDTO> findByStateAndBuildTypeId(BuildOrderState state,
+        Long buildTypeId) {
+      log.debug("Request to get BuildOrder by state and buildTypeId : {}, {}", state, buildTypeId);
+      List<BuildOrder> buildOrders = buildOrderRepository.findByStateAndBuildTypeId(state, buildTypeId);
+      return buildOrderMapper.toDto(buildOrders);
+    }
 }

@@ -2,8 +2,10 @@ package co.com.personalsoft.web.rest;
 
 import co.com.personalsoft.service.BuildOrderQueryService;
 import co.com.personalsoft.service.BuildOrderService;
+import co.com.personalsoft.service.core.Report;
 import co.com.personalsoft.service.dto.BuildOrderCriteria;
 import co.com.personalsoft.service.dto.BuildOrderDTO;
+import co.com.personalsoft.service.dto.core.BuidOrderReportDTO;
 import co.com.personalsoft.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -41,10 +43,14 @@ public class BuildOrderResource {
     private final BuildOrderService buildOrderService;
 
     private final BuildOrderQueryService buildOrderQueryService;
+    
+    private final Report reportService;
 
-    public BuildOrderResource(BuildOrderService buildOrderService, BuildOrderQueryService buildOrderQueryService) {
+    public BuildOrderResource(BuildOrderService buildOrderService, BuildOrderQueryService buildOrderQueryService,
+          Report reportService) {
         this.buildOrderService = buildOrderService;
         this.buildOrderQueryService = buildOrderQueryService;
+        this.reportService = reportService;
     }
 
     /**
@@ -128,6 +134,12 @@ public class BuildOrderResource {
         Page<BuildOrderDTO> page = buildOrderQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/build-orders-report")
+    public ResponseEntity<BuidOrderReportDTO> getBuildOrdersReport() {
+        log.debug("REST request to get BuildOrdersReport");
+        return ResponseEntity.ok().body(reportService.report());
     }
 
     /**

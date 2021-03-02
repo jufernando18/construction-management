@@ -101,8 +101,8 @@ public abstract class DomainBusinessImpl implements DomainBusiness {
   }
   
   private void updateMaterial(Pair<Integer, MaterialDTO> amountAndMaterial) {
-    Integer amountMaterial = amountAndMaterial.left;
-    MaterialDTO material = amountAndMaterial.right;
+    Integer amountMaterial = amountAndMaterial.getLeft();
+    MaterialDTO material = amountAndMaterial.getRight();
     material.setAmountAvailable(material.getAmountAvailable() - amountMaterial);
     saveMaterial(material); 
   }
