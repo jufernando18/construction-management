@@ -1,6 +1,10 @@
 package co.com.personalsoft.service;
 
+import co.com.personalsoft.domain.enumeration.BuildOrderState;
 import co.com.personalsoft.service.dto.BuildOrderDTO;
+
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,4 +51,8 @@ public interface BuildOrderService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    List<BuildOrderDTO> findByStateAndStart(BuildOrderState state, LocalDate start);
+    
+    List<BuildOrderDTO> findByStateAndFinish(BuildOrderState state, LocalDate finish);
 }

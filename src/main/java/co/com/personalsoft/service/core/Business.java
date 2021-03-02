@@ -1,12 +1,10 @@
 package co.com.personalsoft.service.core;
 
-import co.com.personalsoft.service.core.errors.EntityBusinessException;
-import co.com.personalsoft.service.dto.RequisitionDTO;
+import co.com.personalsoft.domain.core.DomainBusiness;
 
 /**
  * Business
  */
-public interface Business {
-
-  RequisitionDTO verifyAndSaveRequisition(RequisitionDTO requisition) throws EntityBusinessException;
+public interface Business extends DomainBusiness {
+  
 }

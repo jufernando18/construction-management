@@ -5,6 +5,7 @@ import co.com.personalsoft.repository.RequisitionRepository;
 import co.com.personalsoft.service.RequisitionService;
 import co.com.personalsoft.service.dto.RequisitionDTO;
 import co.com.personalsoft.service.mapper.RequisitionMapper;
+
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,5 +89,11 @@ public class RequisitionServiceImpl implements RequisitionService {
     public void delete(Long id) {
         log.debug("Request to delete Requisition : {}", id);
         requisitionRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<RequisitionDTO> findByCoordinate(String coordinate) {
+      log.debug("Request to get Requisition by coordinate : {}", coordinate);
+      return requisitionRepository.findByCoordinate(coordinate).map(requisitionMapper::toDto);
     }
 }

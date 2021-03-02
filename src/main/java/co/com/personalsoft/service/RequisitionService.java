@@ -1,6 +1,7 @@
 package co.com.personalsoft.service;
 
 import co.com.personalsoft.service.dto.RequisitionDTO;
+
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,4 +48,6 @@ public interface RequisitionService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    Optional<RequisitionDTO> findByCoordinate(String coordinate);
 }

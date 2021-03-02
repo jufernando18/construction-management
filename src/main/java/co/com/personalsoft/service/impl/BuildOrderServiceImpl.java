@@ -1,10 +1,14 @@
 package co.com.personalsoft.service.impl;
 
 import co.com.personalsoft.domain.BuildOrder;
+import co.com.personalsoft.domain.enumeration.BuildOrderState;
 import co.com.personalsoft.repository.BuildOrderRepository;
 import co.com.personalsoft.service.BuildOrderService;
 import co.com.personalsoft.service.dto.BuildOrderDTO;
 import co.com.personalsoft.service.mapper.BuildOrderMapper;
+
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,5 +88,19 @@ public class BuildOrderServiceImpl implements BuildOrderService {
     public void delete(Long id) {
         log.debug("Request to delete BuildOrder : {}", id);
         buildOrderRepository.deleteById(id);
+    }
+
+    @Override
+    public List<BuildOrderDTO> findByStateAndStart(BuildOrderState state, LocalDate start) {
+      log.debug("Request to get BuildOrder by state and start : {}, {}", state, start);
+      List<BuildOrder> buildOrders = buildOrderRepository.findByStateAndStart(state, start);
+      return buildOrderMapper.toDto(buildOrders);
+    }
+
+    @Override
+    public List<BuildOrderDTO> findByStateAndFinish(BuildOrderState state, LocalDate finish) {
+      log.debug("Request to get BuildOrder by state and finish : {}, {}", state, finish);
+      List<BuildOrder> buildOrders = buildOrderRepository.findByStateAndFinish(state, finish);
+      return buildOrderMapper.toDto(buildOrders);
     }
 }

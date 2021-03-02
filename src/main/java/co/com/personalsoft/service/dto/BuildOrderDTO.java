@@ -13,15 +13,13 @@ public class BuildOrderDTO implements Serializable {
 
     private Long id;
 
-    @NotNull
     private BuildOrderState state;
 
-    @NotNull
     private LocalDate start;
 
-    @NotNull
     private LocalDate finish;
 
+    @NotNull
     private RequisitionDTO requisition;
 
     public Long getId() {

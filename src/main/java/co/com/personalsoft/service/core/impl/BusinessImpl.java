@@ -5,11 +5,12 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import co.com.personalsoft.domain.Citadel;
+import co.com.personalsoft.domain.core.impl.DomainBusinessImpl;
 import co.com.personalsoft.domain.core.shared.Pair;
 import co.com.personalsoft.domain.enumeration.BuildOrderState;
 import co.com.personalsoft.domain.enumeration.RequisitionState;
 import co.com.personalsoft.service.BuildOrderService;
+import co.com.personalsoft.service.BuildTypeService;
 import co.com.personalsoft.service.CitadelService;
 import co.com.personalsoft.service.MaterialService;
 import co.com.personalsoft.service.RequisitionQueryService;
@@ -28,82 +29,64 @@ import tech.jhipster.service.filter.StringFilter;
  * BusinessImpl
  */
 @Service
-public class BusinessImpl implements Business {
+public class BusinessImpl extends DomainBusinessImpl implements Business {
   
   private final RequisitionService requisitionService;
-  
-  private final RequisitionQueryService requisitionQueryService;
-  
+    
   private final MaterialService materialService;
 
   private final CitadelService citadelService;
   
   private final BuildOrderService buildOrderService;
   
-  public BusinessImpl(RequisitionService requisitionService, RequisitionQueryService requisitionQueryService,
-      MaterialService materialService, CitadelService citadelService, BuildOrderService buildOrderService) {
+  private final BuildTypeService buildTypeService; 
+  
+  public BusinessImpl(RequisitionService requisitionService, MaterialService materialService, 
+      CitadelService citadelService, BuildOrderService buildOrderService, BuildTypeService buildTypeService) {
     this.requisitionService = requisitionService;
-    this.requisitionQueryService = requisitionQueryService;
     this.materialService = materialService;
     this.citadelService = citadelService;
     this.buildOrderService = buildOrderService;
+    this.buildTypeService = buildTypeService;
   }
 
-  public RequisitionDTO verifyAndSaveRequisition(RequisitionDTO requisition) throws EntityBusinessException {
-    RequisitionCriteria requisitionCriteria = new RequisitionCriteria();
-    StringFilter coordinateCriteria = new StringFilter();
-    coordinateCriteria.setEquals(requisition.getCoordinate());
-    requisitionCriteria.setCoordinate(coordinateCriteria);
-    boolean coordinateAvailable = requisitionQueryService.findByCriteria(requisitionCriteria).isEmpty();
-    if (!coordinateAvailable) {
-      throw new EntityBusinessException("coordinateNotAvailable");
-    }
-    BuildTypeDTO buildType = requisition.getBuildType();
-    CitadelDTO citadel = requisition.getCitadel();
-    verifyMaterialsAvailableAndUpdate(buildType);
-    LocalDate now = LocalDate.now();
-    LocalDate start = citadel.getFinish().isAfter(now) ? citadel.getFinish() : now;
-    LocalDate finish = start.plusDays(buildType.getDuration());
-    requisition.setState(RequisitionState.APPROVED);
-    requisition.setDate(now);
-    requisition = requisitionService.save(requisition);
-    
-    BuildOrderDTO buildOrder = new BuildOrderDTO();
-    buildOrder.setRequisition(requisition);
-    buildOrder.setState(BuildOrderState.PENDING);
-    buildOrder.setStart(start);
-    buildOrder.setFinish(finish);
-    buildOrderService.save(buildOrder);
-    
-    citadel.setFinish(finish);
-    citadelService.save(citadel);
-    return requisition;
-  }  
-  
-  private void verifyMaterialsAvailableAndUpdate(BuildTypeDTO buildType) throws EntityBusinessException {
-    Pair<Integer, MaterialDTO> amountAndMaterial1 = verifyMaterial(buildType.getAmountMaterial1(), materialService.findOne(buildType.getMaterial1().getId()), "material1NotAvailable");
-    Pair<Integer, MaterialDTO> amountAndMaterial2 = verifyMaterial(buildType.getAmountMaterial2(), materialService.findOne(buildType.getMaterial2().getId()), "material2NotAvailable");
-    Pair<Integer, MaterialDTO> amountAndMaterial3 = verifyMaterial(buildType.getAmountMaterial3(), materialService.findOne(buildType.getMaterial3().getId()), "material3NotAvailable");
-    Pair<Integer, MaterialDTO> amountAndMaterial4 = verifyMaterial(buildType.getAmountMaterial4(), materialService.findOne(buildType.getMaterial4().getId()), "material4NotAvailable");
-    Pair<Integer, MaterialDTO> amountAndMaterial5 = verifyMaterial(buildType.getAmountMaterial5(), materialService.findOne(buildType.getMaterial5().getId()), "material5NotAvailable");
-    updateMaterial(amountAndMaterial1);
-    updateMaterial(amountAndMaterial2);
-    updateMaterial(amountAndMaterial3);
-    updateMaterial(amountAndMaterial4);
-    updateMaterial(amountAndMaterial5);
+  @Override
+  public Optional<RequisitionDTO> findRequisitionByCoordinate(String coordinate) {
+    return requisitionService.findByCoordinate(coordinate);
   }
-  
-  private Pair<Integer, MaterialDTO> verifyMaterial(Integer amountMaterial, Optional<MaterialDTO> oMaterial, String errorKey) throws EntityBusinessException {
-    if (!oMaterial.isPresent() || amountMaterial > oMaterial.get().getAmountAvailable()) {
-      throw new EntityBusinessException(errorKey);
-    }  
-    return new Pair<>(amountMaterial, oMaterial.get());
+
+  @Override
+  public Optional<MaterialDTO> findMaterialById(Long id) {
+    return materialService.findOne(id);
   }
-  
-  private void updateMaterial(Pair<Integer, MaterialDTO> amountAndMaterial) {
-    Integer amountMaterial = amountAndMaterial.left;
-    MaterialDTO material = amountAndMaterial.right;
-    material.setAmountAvailable(material.getAmountAvailable() - amountMaterial);
-    materialService.save(material); 
+
+  @Override
+  public Optional<BuildTypeDTO> findBuildTypeById(Long id) {
+    return buildTypeService.findOne(id);
+  }
+
+  @Override
+  public Optional<CitadelDTO> findCitadelById(Long id) {
+    return citadelService.findOne(id);
+  }
+
+  @Override
+  public RequisitionDTO saveRequisition(RequisitionDTO requisiton) {
+    return requisitionService.save(requisiton);
+  }
+
+  @Override
+  public MaterialDTO saveMaterial(MaterialDTO material) {
+    return materialService.save(material);
+  }
+
+  @Override
+  public BuildOrderDTO saveBuildOrder(BuildOrderDTO buildOrder) {
+    return buildOrderService.save(buildOrder);
+  }
+
+  @Override
+  public CitadelDTO saveCitadel(CitadelDTO citadel) {
+    return citadelService.save(citadel);
   }
 }
