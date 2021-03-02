@@ -1,19 +1,19 @@
 {
   "home": {
-    "title": "¡Bienvenido, Java Hipster!",
+    "title": "¡Bienvenido, Constructores S.A.S",
     "subtitle": "Esta es su página de inicio",
     "logged": {
       "message": "Está conectado como \"{{username}}\"."
     },
-    "question": "Si tiene preguntas sobre JHipster:",
+    "question": "Si tiene preguntas sobre Constructores S.A.S:",
     "link": {
-      "homepage": "Página de inicio de JHipster",
+      "homepage": "Página de inicio de Constructores S.A.S",
       "stackoverflow": "JHipster en Stack Overflow",
       "bugtracker": "JHipster seguimiento de errores",
-      "chat": "Sala de chat pública de JHipster",
-      "follow": "contacto @jhipster en Twitter"
+      "chat": "Sala de chat pública de Constructores S.A.S",
+      "follow": "contacto @ConstructoresSAS en Twitter"
     },
-    "like": "Si te gusta JHipster, danos una estrella en",
+    "like": "Si te gusta Constructores S.A.S, danos una estrella en",
     "github": "GitHub"
   }
 }
