@@ -1,0 +1,15 @@
+Constructores S.A.S.		Ciudadela del Futuro
+
+Reporte: Ordenes de construcción
+
+Ordenes pendientes: 
+	Nombre	:: Tipo	::Estado	::Inicio	::Finalización	
+
+Cantidad de órdenes finalizadas por tipo:
+	Cancha de fútbol	: 0
+	Casa	: 0
+	Gimnasio	: 0
+	Edificio	: 0
+	Lago	: 0
+
+Cantidad de órdenes en progreso	:0

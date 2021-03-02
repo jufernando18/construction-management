@@ -39,40 +39,40 @@
           <th scope="col" jhiSortBy="duration">
             <span jhiTranslate="constructionmanagementApp.buildType.duration">Duration</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" jhiSortBy="material1.name">
+            <span jhiTranslate="constructionmanagementApp.buildType.material1">Material 1</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="amountMaterial1">
             <span jhiTranslate="constructionmanagementApp.buildType.amountMaterial1">Amount Material 1</span>
             <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="material2.name">
+            <span jhiTranslate="constructionmanagementApp.buildType.material2">Material 2</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="amountMaterial2">
             <span jhiTranslate="constructionmanagementApp.buildType.amountMaterial2">Amount Material 2</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" jhiSortBy="material3.name">
+            <span jhiTranslate="constructionmanagementApp.buildType.material3">Material 3</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="amountMaterial3">
             <span jhiTranslate="constructionmanagementApp.buildType.amountMaterial3">Amount Material 3</span>
             <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="material4.name">
+            <span jhiTranslate="constructionmanagementApp.buildType.material4">Material 4</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="amountMaterial4">
             <span jhiTranslate="constructionmanagementApp.buildType.amountMaterial4">Amount Material 4</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" jhiSortBy="material5.name">
+            <span jhiTranslate="constructionmanagementApp.buildType.material5">Material 5</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="amountMaterial5">
             <span jhiTranslate="constructionmanagementApp.buildType.amountMaterial5">Amount Material 5</span>
             <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="material1.name">
-            <span jhiTranslate="constructionmanagementApp.buildType.material1">Material 1</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="material2.name">
-            <span jhiTranslate="constructionmanagementApp.buildType.material2">Material 2</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="material3.name">
-            <span jhiTranslate="constructionmanagementApp.buildType.material3">Material 3</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="material4.name">
-            <span jhiTranslate="constructionmanagementApp.buildType.material4">Material 4</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="material5.name">
-            <span jhiTranslate="constructionmanagementApp.buildType.material5">Material 5</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col"></th>
         </tr>
@@ -84,36 +84,36 @@
           </td>
           <td>{{ buildType.name }}</td>
           <td>{{ buildType.duration }}</td>
-          <td>{{ buildType.amountMaterial1 }}</td>
-          <td>{{ buildType.amountMaterial2 }}</td>
-          <td>{{ buildType.amountMaterial3 }}</td>
-          <td>{{ buildType.amountMaterial4 }}</td>
-          <td>{{ buildType.amountMaterial5 }}</td>
           <td>
             <div *ngIf="buildType.material1">
               <a [routerLink]="['/material', buildType.material1?.id, 'view']">{{ buildType.material1?.name }}</a>
             </div>
           </td>
+          <td>{{ buildType.amountMaterial1 }}</td>
           <td>
             <div *ngIf="buildType.material2">
               <a [routerLink]="['/material', buildType.material2?.id, 'view']">{{ buildType.material2?.name }}</a>
             </div>
           </td>
+          <td>{{ buildType.amountMaterial2 }}</td>
           <td>
             <div *ngIf="buildType.material3">
               <a [routerLink]="['/material', buildType.material3?.id, 'view']">{{ buildType.material3?.name }}</a>
             </div>
           </td>
+          <td>{{ buildType.amountMaterial3 }}</td>
           <td>
             <div *ngIf="buildType.material4">
               <a [routerLink]="['/material', buildType.material4?.id, 'view']">{{ buildType.material4?.name }}</a>
             </div>
           </td>
+          <td>{{ buildType.amountMaterial4 }}</td>
           <td>
             <div *ngIf="buildType.material5">
               <a [routerLink]="['/material', buildType.material5?.id, 'view']">{{ buildType.material5?.name }}</a>
             </div>
           </td>
+          <td>{{ buildType.amountMaterial5 }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button

@@ -5,6 +5,8 @@ import co.com.personalsoft.repository.BuildTypeRepository;
 import co.com.personalsoft.service.BuildTypeService;
 import co.com.personalsoft.service.dto.BuildTypeDTO;
 import co.com.personalsoft.service.mapper.BuildTypeMapper;
+
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,5 +102,12 @@ public class BuildTypeServiceImpl implements BuildTypeService {
     public void delete(Long id) {
         log.debug("Request to delete BuildType : {}", id);
         buildTypeRepository.deleteById(id);
+    }
+
+    @Override
+    public List<BuildTypeDTO> findAll() {
+      log.debug("Request to get all BuildTypes");
+      List<BuildType> buildTypes = buildTypeRepository.findAll();
+      return buildTypeMapper.toDto(buildTypes);
     }
 }

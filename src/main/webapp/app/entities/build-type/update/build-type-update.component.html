@@ -59,6 +59,29 @@
         </div>
 
         <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.material1" for="field_material1"
+            >Material 1</label
+          >
+          <select class="form-control" id="field_material1" data-cy="material1" name="material1" formControlName="material1">
+            <option *ngIf="!editForm.get('material1')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="materialOption.id === editForm.get('material1')!.value?.id ? editForm.get('material1')!.value : materialOption"
+              *ngFor="let materialOption of materials; trackBy: trackMaterialById"
+            >
+              {{ materialOption.name }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['material1'])!.invalid && (editForm.get(['material1'])!.dirty || editForm.get(['material1'])!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['material1'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+        <div class="form-group">
           <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.amountMaterial1" for="field_amountMaterial1"
             >Amount Material 1</label
           >
@@ -101,6 +124,20 @@
           </div>
         </div>
 
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.material2" for="field_material2"
+            >Material 2</label
+          >
+          <select class="form-control" id="field_material2" data-cy="material2" name="material2" formControlName="material2">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="materialOption.id === editForm.get('material2')!.value?.id ? editForm.get('material2')!.value : materialOption"
+              *ngFor="let materialOption of materials; trackBy: trackMaterialById"
+            >
+              {{ materialOption.name }}
+            </option>
+          </select>
+        </div>
         <div class="form-group">
           <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.amountMaterial2" for="field_amountMaterial2"
             >Amount Material 2</label
@@ -145,6 +182,20 @@
         </div>
 
         <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.material3" for="field_material3"
+            >Material 3</label
+          >
+          <select class="form-control" id="field_material3" data-cy="material3" name="material3" formControlName="material3">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="materialOption.id === editForm.get('material3')!.value?.id ? editForm.get('material3')!.value : materialOption"
+              *ngFor="let materialOption of materials; trackBy: trackMaterialById"
+            >
+              {{ materialOption.name }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
           <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.amountMaterial3" for="field_amountMaterial3"
             >Amount Material 3</label
           >
@@ -187,6 +238,20 @@
           </div>
         </div>
 
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.material4" for="field_material4"
+            >Material 4</label
+          >
+          <select class="form-control" id="field_material4" data-cy="material4" name="material4" formControlName="material4">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="materialOption.id === editForm.get('material4')!.value?.id ? editForm.get('material4')!.value : materialOption"
+              *ngFor="let materialOption of materials; trackBy: trackMaterialById"
+            >
+              {{ materialOption.name }}
+            </option>
+          </select>
+        </div>
         <div class="form-group">
           <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.amountMaterial4" for="field_amountMaterial4"
             >Amount Material 4</label
@@ -231,6 +296,20 @@
         </div>
 
         <div class="form-group">
+          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.material5" for="field_material5"
+            >Material 5</label
+          >
+          <select class="form-control" id="field_material5" data-cy="material5" name="material5" formControlName="material5">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="materialOption.id === editForm.get('material5')!.value?.id ? editForm.get('material5')!.value : materialOption"
+              *ngFor="let materialOption of materials; trackBy: trackMaterialById"
+            >
+              {{ materialOption.name }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
           <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.amountMaterial5" for="field_amountMaterial5"
             >Amount Material 5</label
           >
@@ -271,90 +350,6 @@
               This field should be a number.
             </small>
           </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.material1" for="field_material1"
-            >Material 1</label
-          >
-          <select class="form-control" id="field_material1" data-cy="material1" name="material1" formControlName="material1">
-            <option *ngIf="!editForm.get('material1')!.value" [ngValue]="null" selected></option>
-            <option
-              [ngValue]="materialOption.id === editForm.get('material1')!.value?.id ? editForm.get('material1')!.value : materialOption"
-              *ngFor="let materialOption of materials; trackBy: trackMaterialById"
-            >
-              {{ materialOption.name }}
-            </option>
-          </select>
-        </div>
-        <div *ngIf="editForm.get(['material1'])!.invalid && (editForm.get(['material1'])!.dirty || editForm.get(['material1'])!.touched)">
-          <small
-            class="form-text text-danger"
-            *ngIf="editForm.get(['material1'])?.errors?.required"
-            jhiTranslate="entity.validation.required"
-          >
-            This field is required.
-          </small>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.material2" for="field_material2"
-            >Material 2</label
-          >
-          <select class="form-control" id="field_material2" data-cy="material2" name="material2" formControlName="material2">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="materialOption.id === editForm.get('material2')!.value?.id ? editForm.get('material2')!.value : materialOption"
-              *ngFor="let materialOption of materials; trackBy: trackMaterialById"
-            >
-              {{ materialOption.name }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.material3" for="field_material3"
-            >Material 3</label
-          >
-          <select class="form-control" id="field_material3" data-cy="material3" name="material3" formControlName="material3">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="materialOption.id === editForm.get('material3')!.value?.id ? editForm.get('material3')!.value : materialOption"
-              *ngFor="let materialOption of materials; trackBy: trackMaterialById"
-            >
-              {{ materialOption.name }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.material4" for="field_material4"
-            >Material 4</label
-          >
-          <select class="form-control" id="field_material4" data-cy="material4" name="material4" formControlName="material4">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="materialOption.id === editForm.get('material4')!.value?.id ? editForm.get('material4')!.value : materialOption"
-              *ngFor="let materialOption of materials; trackBy: trackMaterialById"
-            >
-              {{ materialOption.name }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="constructionmanagementApp.buildType.material5" for="field_material5"
-            >Material 5</label
-          >
-          <select class="form-control" id="field_material5" data-cy="material5" name="material5" formControlName="material5">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="materialOption.id === editForm.get('material5')!.value?.id ? editForm.get('material5')!.value : materialOption"
-              *ngFor="let materialOption of materials; trackBy: trackMaterialById"
-            >
-              {{ materialOption.name }}
-            </option>
-          </select>
         </div>
       </div>
 

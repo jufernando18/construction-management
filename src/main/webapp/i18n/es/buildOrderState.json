@@ -2,9 +2,9 @@
   "constructionmanagementApp": {
     "BuildOrderState": {
       "null": "",
-      "PENDING": "PENDING",
-      "BUILDING": "BUILDING",
-      "FINISHED": "FINISHED"
+      "PENDING": "PENDIENTE",
+      "BUILDING": "EN PROGRESO",
+      "FINISHED": "FINALIZADO"
     }
   }
 }

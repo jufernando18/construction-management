@@ -20,14 +20,14 @@ public class RequisitionDTO implements Serializable {
     @Pattern(regexp = "^\\d+,\\d+$")
     private String coordinate;
 
-    @NotNull
     private RequisitionState state;
 
-    @NotNull
     private LocalDate date;
 
+    @NotNull
     private BuildTypeDTO buildType;
 
+    @NotNull
     private CitadelDTO citadel;
 
     public Long getId() {

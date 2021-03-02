@@ -1,7 +1,10 @@
 package co.com.personalsoft.web.rest;
 
+import co.com.personalsoft.domain.core.shared.ErrorMsg;
 import co.com.personalsoft.service.RequisitionQueryService;
 import co.com.personalsoft.service.RequisitionService;
+import co.com.personalsoft.service.core.Business;
+import co.com.personalsoft.service.core.errors.EntityBusinessException;
 import co.com.personalsoft.service.dto.RequisitionCriteria;
 import co.com.personalsoft.service.dto.RequisitionDTO;
 import co.com.personalsoft.web.rest.errors.BadRequestAlertException;
@@ -11,13 +14,13 @@ import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -43,9 +46,13 @@ public class RequisitionResource {
 
     private final RequisitionQueryService requisitionQueryService;
 
-    public RequisitionResource(RequisitionService requisitionService, RequisitionQueryService requisitionQueryService) {
+    private final Business business;
+
+    public RequisitionResource(RequisitionService requisitionService, RequisitionQueryService requisitionQueryService,
+            Business business) {
         this.requisitionService = requisitionService;
         this.requisitionQueryService = requisitionQueryService;
+        this.business = business;
     }
 
     /**
@@ -56,12 +63,17 @@ public class RequisitionResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/requisitions")
-    public ResponseEntity<RequisitionDTO> createRequisition(@Valid @RequestBody RequisitionDTO requisitionDTO) throws URISyntaxException {
+    public ResponseEntity<RequisitionDTO> createRequisition(@Valid @RequestBody RequisitionDTO requisitionDTO) throws URISyntaxException, BadRequestAlertException {
         log.debug("REST request to save Requisition : {}", requisitionDTO);
         if (requisitionDTO.getId() != null) {
             throw new BadRequestAlertException("A new requisition cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        RequisitionDTO result = requisitionService.save(requisitionDTO);
+        RequisitionDTO result;
+        try {
+            result = business.verifyAndSaveRequisition(requisitionDTO);
+        } catch (EntityBusinessException e) {
+            throw new BadRequestAlertException(ErrorMsg.msg.get(e.getMessage()), ENTITY_NAME, e.getMessage());
+        }
         return ResponseEntity
             .created(new URI("/api/requisitions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))

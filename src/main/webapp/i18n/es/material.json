@@ -2,7 +2,7 @@
   "constructionmanagementApp": {
     "material": {
       "home": {
-        "title": "Materials",
+        "title": "Materiales",
         "refreshListLabel": "Refresh list",
         "createLabel": "Crear nuevo Material",
         "createOrEditLabel": "Crear o editar Material",
@@ -18,9 +18,9 @@
         "title": "Material"
       },
       "id": "ID",
-      "name": "Name",
-      "acronym": "Acronym",
-      "amountAvailable": "Amount Available"
+      "name": "Nombre",
+      "acronym": "Siglas",
+      "amountAvailable": "Cantidad Disponible"
     }
   }
 }

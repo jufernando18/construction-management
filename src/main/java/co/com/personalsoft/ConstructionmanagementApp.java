@@ -1,15 +1,19 @@
 package co.com.personalsoft;
 
 import co.com.personalsoft.config.ApplicationProperties;
+import co.com.personalsoft.service.core.JobInit;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
+
 import javax.annotation.PostConstruct;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
@@ -99,5 +103,13 @@ public class ConstructionmanagementApp {
             contextPath,
             env.getActiveProfiles()
         );
+    }
+    
+    @Autowired
+    JobInit initJob;
+
+    @PostConstruct
+    public void initCronJob() {
+      initJob.setRunner();
     }
 }
