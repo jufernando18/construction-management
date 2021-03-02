@@ -19,10 +19,10 @@ public abstract class DomainBusinessImpl implements DomainBusiness {
 
   @Override
   public RequisitionDTO verifyAndSaveRequisition(RequisitionDTO requisition) throws EntityBusinessException {
-    verifyRelationships(requisition);
+    Pair<BuildTypeDTO, CitadelDTO> buildTypeAndCitadel = verifyRelationships(requisition);
     verifyCoordinate(requisition.getCoordinate());
-    BuildTypeDTO buildType = requisition.getBuildType();
-    CitadelDTO citadel = requisition.getCitadel();
+    BuildTypeDTO buildType = buildTypeAndCitadel.getLeft();
+    CitadelDTO citadel = buildTypeAndCitadel.getRight();
     verifyMaterialsAvailableAndUpdate(buildType);
     LocalDate now = LocalDate.now();
     LocalDate base = citadel.getFinish().isAfter(now) ? citadel.getFinish() : now;
@@ -30,6 +30,8 @@ public abstract class DomainBusinessImpl implements DomainBusiness {
     LocalDate finish = start.plusDays(buildType.getDuration());
     requisition.setState(RequisitionState.APPROVED);
     requisition.setDate(now);
+    requisition.setBuildType(buildType);
+    requisition.setCitadel(citadel);
     requisition = saveRequisition(requisition);
     
     createBuildOrderInBackground(requisition, citadel, start, finish);

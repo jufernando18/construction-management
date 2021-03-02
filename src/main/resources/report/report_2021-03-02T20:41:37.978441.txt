@@ -1,0 +1,17 @@
+Constructores S.A.S.		Ciudadela del Futuro
+
+Reporte: Ordenes de construcción
+
+Ordenes pendientes: 
+	Nombre	:: Tipo	::Estado	::Inicio	::Finalización	
+	Casa para Juan	::Casa	::PENDING	::2021-03-03	::2021-03-06
+	Casa para Jose	::Casa	::PENDING	::2021-03-07	::2021-03-10
+
+Cantidad de órdenes finalizadas por tipo:
+	Cancha de fútbol	: 0
+	Casa	: 0
+	Gimnasio	: 0
+	Edificio	: 0
+	Lago	: 0
+
+Cantidad de órdenes en progreso	:0
